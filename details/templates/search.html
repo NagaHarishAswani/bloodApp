@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-image: url('https://scitechdaily.com/images/Blood-Cells-Flowing-777x699.jpg');
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            height: 400px; /* Set a fixed height */
+            overflow-y: auto; /* Enable vertical scrolling */
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body style="background-color:pink;">
+    <div class="form-container">
+        <form method="POST">
+            {% csrf_token %}
+            <h2>Enter details to search for a Donor</h2>
+            Blood Group :<select name="sdbg">
+                <option value="A+">A postive(A+)</option>
+                <option value="A-">A negative(A-)</option>
+                <option value="B+">B postive(B+)</option>
+                <option value="B-">B negative(B-)</option>
+                <option value="O+">O postive(O+)</option>
+                <option value="O-">O negative(O-)</option>
+            </select><br><br>
+            City Name : <input type="text" name="sdcity"><br><br>
+            <input type="submit" value="Display Donor Info" class="button"><br><br>
+            <a href="/" class="button">Home</a> <!-- Back button -->
+        </form>
+        <br><br>
+        {% for don in don %}
+            <hr>
+            <h2>Name : {{don.name}}</h2>
+            <h2>Age : {{don.age}}</h2>
+            <h2>Blood Group : {{don.bg}}</h2>
+            <h2>Gender : {{don.gender}}</h2>
+            <h2>City : {{don.city}}</h2>
+            <h2>Phone Number : {{don.phno}}</h2>
+            <hr>
+        {% endfor %}
+        {% if flag %}
+            <h2>Donor not present</h2>
+        {% endif %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Donor Information</title>
+    <style>
+        body {
+            background-image: url('https://scitechdaily.com/images/Blood-Cells-Flowing-777x699.jpg');
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .form-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Update Donor Information</h2>
+        <form method="POST">
+            {% csrf_token %}
+            Name : <input type="text" name="name" value="{{ donor.name }}"><br><br>
+            Age : <input type="number" name="age" value="{{ donor.age }}"><br><br>
+            Blood Group : <select name="bg">
+                <option value="A+" {% if donor.bg == 'A+' %}selected{% endif %}>A postive(A+)</option>
+                <option value="A-" {% if donor.bg == 'A-' %}selected{% endif %}>A negative(A-)</option>
+                <option value="B+" {% if donor.bg == 'B+' %}selected{% endif %}>B postive(B+)</option>
+                <option value="B-" {% if donor.bg == 'B-' %}selected{% endif %}>B negative(B-)</option>
+                <option value="O+" {% if donor.bg == 'O+' %}selected{% endif %}>O postive(O+)</option>
+                <option value="O-" {% if donor.bg == 'O-' %}selected{% endif %}>O negative(O-)</option>
+            </select><br><br>
+            Gender : Male<input type="radio" value="Male" {% if donor.gender == 'Male' %}checked{% endif %} name="gender"> Female<input type="radio" value="Female" {% if donor.gender == 'Female' %}checked{% endif %} name="gender"><br><br>
+            City : <input type="text" name="city" value="{{ donor.city }}"><br><br>
+            Phone Number : <input type="text" name="phno" value="{{ donor.phno }}"><br><br>
+            <input type="submit" class="button" value="Update">
+            <a href="/" class="button">Back</a> <!-- Back button -->
+        </form>
+    </div>
+</body>
+</html>
